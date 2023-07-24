@@ -1,0 +1,29 @@
+.constraints {
+    font-size: 12px;
+    overflow-y: auto;
+    height: calc(100% - 46px);
+
+    .constraint {
+        background-color: rgb(246,246,246);
+        margin-bottom: 4px;
+        padding: 3px;
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            small {
+                color: #8b0000;
+            }
+        }
+        .asp {
+            font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+        }
+        .description {
+            padding: 2px 0 4px 0;
+            background-color: #f6f6f6;
+            color: #757a80;
+            font-size: 11px;
+            line-height: 1.1;
+        }
+    }
+}

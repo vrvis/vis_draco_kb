@@ -1,0 +1,16 @@
+.deleteDatabase {
+    position:absolute;
+    right:5px;
+    top:5px;
+    z-index:1500;
+    background-color:#fff;
+    color: #333;
+    border:1px solid #ffc421;
+    padding: 7px;
+    opacity: 0.3;
+    cursor:pointer;
+    &:hover {
+        background-color:#fff3d1;
+        opacity: 1;
+    }
+}

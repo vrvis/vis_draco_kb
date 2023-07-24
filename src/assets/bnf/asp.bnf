@@ -1,0 +1,129 @@
+<program>            ::= [<statements>] [<query>]
+
+<statements>         ::= [<statements>] <statement>
+<query>              ::= <classical_literal> <QUERY_MARK>
+
+<statement>          ::= <CONS> [<body>] <DOT>
+                       | <head> [<CONS> [<body>]] <DOT>
+                       | <WCONS> [<body>] <DOT> 
+                           <SQUARE_OPEN> <weight_at_level> <SQUARE_CLOSE>
+
+<head>               ::= <disjunction> | <choice>
+<body>               ::= [<body> <COMMA>]
+                           (<naf_literal> | [<NAF>] <aggregate>)
+
+<disjunction>        ::= [<disjunction> <OR>] <classical_literal>
+
+<choice>             ::= [<term> <binop>] 
+                           <CURLY_OPEN> [<choice_elements>]
+                           <CURLY_CLOSE> [<binop> <term>]
+<choice_elements>    ::= [<choice_elements> <SEMICOLON>] 
+                           <choice_element>
+<choice_element>     ::= <classical_literal> [<COLON> [<naf_literals>]]
+
+<aggregate>          ::= [<term> <binop>] <aggregate function> 
+                           <CURLY_OPEN>  [<aggregate_elements>]
+                           <CURLY_CLOSE> [<binop> <term>]
+<aggregate_elements> ::= [<aggregate_elements> <SEMICOLON>] 
+                           <aggregate_element>
+<aggregate_element>  ::= [<basic_terms>] [<COLON> [<naf_literals>]]
+<aggregate_function> ::= <AGGREGATE_COUNT>
+                       | <AGGREGATE_MAX>
+                       | <AGGREGATE_MIN> 
+                       | <AGGREGATE_SUM>
+
+<weight_at_level>    ::= <term> [<AT> <term>] [<COMMA> <terms>]
+
+<naf_literals>       ::= [<naf_literals> <COMMA>] <naf_literal>
+<naf_literal>        ::= [<NAF>] <classical_literal> | <builtin_atom>
+
+<classical_literal>  ::= [<MINUS>] <ID> [<PAREN_OPEN> [<terms>] <PAREN_CLOSE>]
+<builtin_atom>       ::= <term> <binop> <term>
+
+<binop>              ::= <EQUAL>
+                       | <UNEQUAL>
+                       | <LESS>
+                       | <GREATER>
+                       | <LESS_OR_EQ>
+                       | <GREATER_OR_EQ>
+
+<terms>              ::= [<terms> <COMMA>] <term>
+<term>               ::= <ID [<PAREN_OPEN> [<terms>] <PAREN_CLOSE>]
+                       | <NUMBER>
+                       | <STRING>
+                       | <VARIABLE>
+                       | <ANONYMOUS_VARIABLE>
+                       | <PAREN_OPEN> <term> <PAREN_CLOSE>
+                       | <MINUS> <term>
+                       | <term> <arithop> <term>
+
+<basic_terms>        ::= [<basic_terms> <COMMA>] <basic_term>
+<basic_term>         ::= <ground_term> |
+                         <variable_term>
+<ground_term>        ::= <SYMBOLIC_CONSTANT> |
+                         <STRING> | [<MINUS] <NUMBER>
+<variable_term>      ::= <VARIABLE> |
+                         <ANONYMOUS_VARIABLE>
+<arithop>            ::= <PLUS>
+                       | <MINUS>
+                       | <TIMES>
+                       | <DIV>
+
+<ZERO> ::= "0"
+<DIGIT_NO_ZERO> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<DIGIT> ::= "0" | <DIGIT_NO_ZERO>
+<ALPHABET_SMALL> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+<ALPHABET_BIG> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+<UNDERLINE> ::= "_"
+
+<ALPHANUMERIC_SMALL> ::= <ALPHABET_SMALL> | <ALPHABET_BIG> | <DIGIT> | <UNDERLINE> | <ALPHANUMERIC_SMALL>
+<ALPHANUMERIC_BIG> ::= <ALPHABET_BIG> | <ALPHABET_BIG> | <DIGIT> | <UNDERLINE> | <ALPHANUMERIC_BIG>
+<ID> ::=  <ALPHABET_SMALL> | <ALPHABET_SMALL> <ALPHANUMERIC_SMALL>
+
+<VARIABLE> ::= <ALPHABET_BIG> | <ALPHABET_BIG> <ALPHANUMERIC_BIG>
+
+<STRING_CONTENT> ::= <STRING_CONTENT> | <DIGIT> | <ALPHABET_SMALL> | <ALPHABET_BIG> | <UNDERLINE>
+<STRING> ::= "\"" "\""
+
+<DIGIT_REPEAT> ::= <DIGIT_RECURSION> | <DIGIT>
+<NUMBER> ::= <ZERO> | <DIGIT_NO_ZERO> | <DIGIT_NO_ZERO> <DIGIT_REPEAT>
+
+<ANONYMOUS_VARIABLE> ::= <UNDERLINE>
+<DOT> ::= "."
+<COMMA> ::= ","
+<QUERY_MARK> ::= "?"
+<COLON> ::= ":"
+<SEMICOLON> ::= ";"
+<OR> ::= "|"
+<NAF> ::= "not"
+<CONS> ::= ":-"
+<WCONS> ::= ":~"
+<PLUS> ::= "+"
+<MINUS> ::= "-"
+<TIMES> ::= "*"
+<DIV> ::= "/"
+<AT> ::= "@"
+<PARENT_OPEN> ::= "("
+<PAREN_CLOSE> ::= ")"
+<SQUARE_OPEN> ::= "["
+<SQUARE_CLOSE> ::= "]"
+<CURLY_OPEN> ::= "{"
+<CURLY_CLOSE> ::= "}"
+<EQUAL> ::= "="
+<UNEQUAL> ::= "<>" | "!="
+<LESS> ::= "<"
+<GREATER> ::= ">"
+<LESS_OR_EQUAL> ::= "<="
+<GREATER_OR_EQUAL> ::= ">="
+<AGGREAGTE_COUNT> ::= "#count"
+<AGGREGATE_MAX> ::= "#max"
+<AGGREGATE_MIN> ::= "#min"
+<AGGREGATE_SUM> ::= "#sum"
+
+<COMMENT> ::= "%"
+<MULTI_LINE_COMMENT> ::= "%"
+
+<TAB> ::= "\t"
+<NL> ::= "\n"
+<SPACE> ::= " "
+<BLANK> ::= <BLANK> | <TAB> | <NL> | <SPACE>

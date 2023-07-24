@@ -1,0 +1,38 @@
+
+
+::ng-deep .link {
+    fill: none;
+    stroke: #bbb;
+}
+
+::ng-deep .node, ::ng-deep .linknode {
+    circle {
+        pointer-events: all;
+        stroke-width: 1px;
+        cursor: pointer;
+        stroke: #000;
+        stroke-width: 1px;
+    }
+}
+
+::ng-deep svg .node:hover {
+    text {
+        transform: scale(1.5);
+    }
+    circle {
+        transform: scale(1.5);
+    }
+}
+
+svg {
+    height: 100vh !important;
+}
+
+::ng-deep svg .selected path {
+    stroke: darkred;
+    stroke-width: 8px;
+}
+
+::ng-deep svg .hovered path {
+    stroke-width: 8px;
+}

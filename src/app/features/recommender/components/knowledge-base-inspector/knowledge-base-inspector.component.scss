@@ -1,0 +1,32 @@
+::ng-deep {
+    .mat-tab-label {
+        padding: 0 8px !important;
+        min-width: 80px !important;
+        height: 35px !important;
+    }
+
+    .mat-tab-body-wrapper {
+        display: block;
+        height: calc(100% - 35px);
+        overflow: hidden;
+    }
+
+    .mat-tab-label-active {
+        color: #fff !important;
+        opacity: 1 !important;
+    }
+}
+
+.tabs {
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+
+    .tab-content {
+        display: block;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+}

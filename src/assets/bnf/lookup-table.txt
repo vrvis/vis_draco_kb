@@ -1,0 +1,100 @@
+<ZERO> ::= "0"
+<DIGIT_ZERO> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<DIGIT_ONE> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<ALPHABET_SMALL> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+<ALPHABET_BIG> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+<UNDERLINE> ::= "_"
+<STRING_IDENTIFIER> ::= <quote1>
+
+<ALPHANUMERIC_SMALL> ::= <ALPHABET_SMALL> | <ALPHABET_BIG> | <DIGIT_ZERO> | <UNDERLINE> | <ALPHANUMERIC_SMALL>
+<ALPHANUMERIC_BIG> ::= <ALPHABET_BIG> | <ALPHABET_BIG> | <DIGIT_ZERO> | <UNDERLINE> | <ALPHANUMERIC_BIG>
+<ID> ::=  <ALPHABET_SMALL> | <ALPHABET_SMALL> <ALPHANUMERIC_SMALL>
+
+<VARIABLE> ::= <ALPHABET_BIG> | <ALPHABET_BIG> <ALPHANUMERIC_BIG>
+
+<STRING_CONTENT> ::= <STRING_CONTENT> | <DIGIT_ZERO> | <ALPHABET_SMALL> | <ALPHABET_BIG> | <UNDERLINE>
+<STRING> ::= <STRING_IDENTIFIER> <STRING_IDENTIFIER> | <STRING_IDENTIFIER> <STRING_IDENTIFIER>
+
+<DIGIT_ZERO_REPEAT> ::= <DIGIT_ZERO_RECURSION> | <DIGIT_ZERO>
+<NUMBER> ::= <ZERO> | <DIGIT_ONE> | <DIGIT_ONE> <DIGIT_ZERO_REPEAT>
+
+<ANONYMOUS_VARIABLE> ::= <UNDERLINE>
+<DOT> ::= "."
+<COMMA> ::= ","
+<QUERY_MARK> ::= "?"
+<COLON> ::= ":"
+<SEMICOLON> ::= ";"
+<OR> ::= "|"
+<NAF> ::= "not"
+<CONS> ::= ":="
+<WCONS> ::= ":~"
+<PLUS> ::= "+"
+<MINUS> ::= "-"
+<TIMES> ::= "*"
+<DIV> ::= "/"
+<AT> ::= "@"
+<PARENT_OPEN> ::= "("
+<PAREN_CLOSE> ::= ")"
+<SQUARE_OPEN> ::= "["
+<SQUARE_CLOSE> ::= "]"
+<CURLY_OPEN> ::= "{"
+<CURLY_CLOSE> ::= "}"
+<EQUAL> ::= "="
+<UNEQUAL> ::= "<>" | "!="
+<LESS> ::= "<"
+<GREATER> ::= ">"
+<LESS_OR_EQUAL> ::= "<="
+<GREATER_OR_EQUAL> ::= ">="
+<AGGREAGTE_COUNT> ::= "#COUNT"
+<AGGREGATE_MAX> ::= "#max"
+<AGGREGATE_MIN> ::= "#min"
+<AGGREGATE_SUM> ::= "#sum"
+
+<COMMENT> ::= "%"
+<MULTI_LINE_COMMENT> ::= "%"
+
+<TAB> ::= \t
+<NL> ::= \n
+<SPACE> ::= " "
+<BLANK> ::= <BLANK> | <TAB> | <NL> | <SPACE>
+
+               
+
+        ID                         & $a, b, \mathit{anna}, \dots$                   & [a-z][A-Za-z0-9{\un}]* \\
+        VARIABLE                   & $X, Y, \mathit{Name}, \dots$                   & [A-Z][A-Za-z0-9{\un}]* \\
+        STRING                     & \rm ``http://bit.ly/cw6lDS'', ``Peter'', \dots & \tb "([\^{}\tb "]|\tb \tb \tb ")*\tb " \\
+        NUMBER                     & $1, 0, 100000, \dots$                          & "0"|[1-9][0-9]* \\
+        ANONYMOUS{\un}VARIABLE     & $\_$                                           & "{\un}" \\
+        DOT                        & $.$                                            & "." \\
+        COMMA                      & $,$                                            & "," \\
+        QUERY{\un}MARK             & $?$                                            & "?" \\
+        COLON                      & $:$                                            & ":" \\
+        SEMICOLON                  & $;$                                            & ";" \\
+        OR                         & $|$                                            & "|" \\
+        NAF                        & $\naf$                                         & "not" \\
+        CONS                       & $\leftarrow$                                   & ":-" \\
+        WCONS                      & $\colonsim$                                    & ":\te" \\
+        PLUS                       & $+$                                            & "+" \\
+        MINUS                      & \rm $-$ or $\neg$                              & "-" \\
+        TIMES                      & $*$                                            & "*" \\
+        DIV                        & $/$                                            & "/" \\
+        AT                         & $@$                                            & "@" \\
+        PAREN{\un}OPEN             & $($                                            & "(" \\
+        PAREN{\un}CLOSE            & $)$                                            & ")" \\
+        SQUARE{\un}OPEN            & $[$                                            & "[" \\
+        SQUARE{\un}CLOSE           & $]$                                            & "]" \\
+        CURLY{\un}OPEN             & $\{$                                           & "\char`\{" \\
+        CURLY{\un}CLOSE            & $\}$                                           & "\char`\}" \\
+        EQUAL                      & $=$                                            & "=" \\
+        UNEQUAL                    & $\not=$                                        & "<>"|"!=" \\
+        LESS                       & $<$                                            & "<" \\
+        GREATER                    & $>$                                            & ">" \\
+        LESS{\un}OR{\un}EQ         & $\leq$                                         & "<=" \\
+        GREATER{\un}OR{\un}EQ      & $\geq$                                         & ">=" \\
+        AGGREGATE{\un}COUNT        & $\aggr{count}$                                 & "\#count" \\
+        AGGREGATE{\un}MAX          & $\aggr{max}$                                   & "\#max" \\
+        AGGREGATE{\un}MIN          & $\aggr{min}$                                   & "\#min" \\
+        AGGREGATE{\un}SUM          & $\aggr{sum}$                                   & "\#sum" \\
+        COMMENT                    & \rm \% this is a comment                       & "\%"([\^{}*\tb n][\^{}\tb n]*)?\tb n \\
+        MULTI{\un}LINE{\un}COMMENT & \rm \%* this is a comment *\%                  & "\%*"([\^{}*]|\tb*[\^{}\%])*"*\%" \\
+        BLANK                      &                                                & [ \tb t\tb n]+   \\

@@ -1,0 +1,132 @@
+
+
+<div class="page-header" *ngIf="false"><h1>Vis Recommender</h1></div>
+
+<div *ngIf="knowledgeBaseDataLoading" style="display:block;width:100%;height:100%"></div>
+<div *ngIf="knowledgeBaseDataLoading" class="spinner">
+    <div>Setting up recommender knowledge base ...</div>
+    <mat-spinner diameter="60"></mat-spinner>
+</div>
+
+<as-split class="recommender-layout" [ngClass]="knowledgeBaseDataLoading ? 'loading' : 'loaded'" (gutterClick)="collapseOrExpand($event, 'outer')" direction="vertical" [unit]="'pixel'" [useTransition]= "true">
+    <as-split-area [size]="gutter.recommender.size[0]" [minSize]="gutter.recommender.minSize" [maxSize]="gutter.recommender.maxSize" [ngClass]="gutter.recommender.current" class="vertical">
+        <div class="header" (click)="collapseOrExpand($event, 'outer', 0, gutter.recommender)">
+            <h2 class="title"><mat-icon aria-hidden="false">{{gutter.recommender.current=='collapsed' ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</mat-icon> <span>Recommendation Query <small>{{gutter.recommender.current=='expanded' ? '(click to close)' : '(click to open)'}}</small></span></h2>
+        </div>
+        <div class="content">
+            <div style="padding: 5px 10px">
+                <mat-form-field class="example-form-field" style="margin-right:10px" appearance="outline">
+                    <mat-label>Models</mat-label>
+                    <input matInput type="number" [(ngModel)]="numModels" [value]="numModels">
+                    <button mat-button *ngIf="numModels" matSuffix mat-icon-button aria-label="Clear" (click)="numModels=1">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                <button mat-stroked-button (click)="recommend()" style="margin-right:10px">Recommend</button>
+                <button mat-stroked-button (click)="parse()" *ngIf="false" style="margin-right:10px">Parse</button>
+            </div>
+    
+            <div class="app-ace-editor" #editor (change)="updateAce()" style="width: 100%;height: 200px;"></div>
+        </div>
+    </as-split-area>
+
+    <as-split-area [visible]="visible_diagrams">
+        <as-split [direction]="direction" [unit]="'pixel'" (gutterClick)="collapseOrExpand($event, 'inner')" [useTransition]="true" class="last-gutter-hide">
+            <as-split-area [size]="gutter.recommendations.size[0]" [minSize]="gutter.recommendations.minSize" #diagrams [ngStyle]="{'display': visible_diagrams ? 'block' : 'none'}" [ngClass]="gutter.recommendations.current" class="horizontal">
+                <div class="header" (click)="collapseOrExpand($event, 'inner', 0, gutter.recommendations)"> 
+                    <h2 class="title"><mat-icon aria-hidden="false">{{gutter.recommendations.current=='collapsed' ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon> <span>Recommendations <small>{{gutter.recommendations.current=='expanded' ? '(click to close)' : '(click to open)'}}</small></span></h2>
+                </div>
+                <div class="content">
+                    <app-recommendations [data]="solutionSet"></app-recommendations>
+                </div>
+            </as-split-area>
+            
+            <as-split-area [size]="gutter.knowledgeBaseInspector.size[0]" [minSize]="gutter.knowledgeBaseInspector.minSize" [ngStyle]="{'display': visible_hypergraph ? 'block' : 'none'}" [ngClass]="gutter.knowledgeBaseInspector.current" class="horizontal">
+                <div class="header" (click)="collapseOrExpand($event, 'inner', 1, gutter.knowledgeBaseInspector)">
+                    <h2 class="title"><mat-icon aria-hidden="false">{{gutter.knowledgeBaseInspector.current=='collapsed' ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</mat-icon> <span>Knowledge Base Viewer <small>{{gutter.knowledgeBaseInspector.current=='expanded' ? '(click to close)' : '(click to open)'}}</small></span></h2>
+                </div>
+                <div class="content">
+                    <div class="controls">
+                        <mat-form-field appearance="outline" style="margin-right:10px">
+                            <mat-label>Choose constraints</mat-label>
+                            <mat-select [(ngModel)]="selectedConstraintType" (selectionChange)="updateRadialHypergraph()">
+                                <mat-option *ngFor="let constraint of constraintTypes | enumToArray" [value]="constraint">{{constraint | titlecase}} Constraints</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" style="margin-right:10px">
+                            <mat-label>Choose connection type</mat-label>
+                            <mat-select [(ngModel)]="selectedFeature" (selectionChange)="updateRadialHypergraph()">
+                                <mat-option *ngFor="let feature of features" [value]="feature">{{feature.title_plural}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Constraint Categories</mat-label>
+                            <mat-select #categoriesFilterSelect multiple [(ngModel)]="selectedCategories">
+                                <div style="margin: 5px 17px;cursor: pointer;" (click)="toggleAllConstraintCategoriesSelection()">
+                                    <mat-checkbox [(ngModel)]="allCategoriesSelected" ngDefaultControl
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="toggleAllConstraintCategoriesSelection()">Select All</mat-checkbox>
+                                </div>
+                                <mat-option (click)="optionClick()" *ngFor="let category of categoriesFilterData" [value]="category">
+                                    {{category.name}}
+                                </mat-option>
+                                <div class="constraint-categories-filter-buttons" (click)="applyFilter()">
+                                    <div class="apply" (click)="applyFilter()">Apply filter</div>
+                                    <div class="remove" (click)="removeAllFilters()">Remove all filters</div>
+                                </div>
+                                
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <app-radial-hypergraph [data]="radialHypergraphData" [selected]="selectedVizRecConstraints" [hovered]="hoveredVizRecConstraints" (selectConstraints)="setSelectedConstraints($event)" (hoverConstraints)="setHoveredConstraints($event)" (filterConstraints)="setFilteredConstraints($event)"></app-radial-hypergraph>
+                </div>
+            </as-split-area>
+
+            <as-split-area [size]="gutter.inspector.size[0]" [minSize]="gutter.inspector.minSize" [maxSize]="gutter.inspector.maxSize" [lockSize]="gutter.inspector.lock" *ngIf="visible_diagrams" [ngClass]="gutter.inspector.current" class="horizontal">
+                <div class="header" (click)="collapseOrExpand($event, 'inner', 2, gutter.inspector)"> 
+                    <h2 class="title"><mat-icon aria-hidden="false">{{gutter.inspector.current=='collapsed' ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</mat-icon> <span>Knowledge Base Inspector <small>{{gutter.inspector.current=='expanded' ? '(click to close)' : '(click to open)'}}</small></span></h2>
+                </div>
+                <div class="content">
+                    <app-constraints-inspector style="display: block;height: 100%;"></app-constraints-inspector>
+                </div>
+            </as-split-area>
+        </as-split>
+    </as-split-area>
+
+    <as-split-area *ngIf="visible_variables && false">
+        <div class="sticky-header horizontal">
+            <div class="title">Features of Input</div>
+        </div>
+        <div class="content">
+            <div *ngIf="astSuccess && ast">
+                <div *ngIf="aspFeatures?.facts.length > 0">
+                    <div><b>Facts:</b></div>
+                    <span *ngFor="let fact of aspFeatures.facts; let i = index">{{fact.text}}<span
+                            *ngIf="i<aspFeatures?.facts.length-1">, </span></span>
+                </div>
+
+                <div *ngIf="aspFeatures?.variables.length > 0">
+                    <div><b>Variables:</b></div>
+                    <span *ngFor="let variable of aspFeatures.variables; let i = index">{{variable.text}}<span
+                            *ngIf="i<aspFeatures?.variables.length-1">, </span></span>
+                </div>
+
+                <div *ngIf="aspFeatures?.integrity_constraints.length > 0">
+                    <div><b>Integrity Constraints:</b></div>
+                    <span
+                        *ngFor="let i_constraint of aspFeatures.integrity_constraints; let i = index">{{i_constraint.text}}<span
+                            *ngIf="i<aspFeatures?.integrity_constraints.length-1">, </span></span>
+                </div>
+
+                <div *ngIf="aspFeatures?.identifiers.length > 0">
+                    <div><b>Identifiers:</b></div>
+                    <span *ngFor="let i_identifier of aspFeatures.identifiers; let i = index">{{i_identifier.text}}<span
+                            *ngIf="i<aspFeatures?.identifiers.length-1">, </span></span>
+                </div>
+            </div>
+            <div *ngIf="!astSuccess && ast">
+                Invalid ASP
+            </div>
+        </div>
+    </as-split-area>
+</as-split>

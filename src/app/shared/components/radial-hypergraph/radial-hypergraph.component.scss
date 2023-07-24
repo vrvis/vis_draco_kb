@@ -1,0 +1,268 @@
+@import "src/variables";
+
+svg {
+    display: block;
+    height: 100vh !important;
+    margin: auto;
+}
+
+@mixin title {
+    color: #212529;
+    font-size: 12px;
+    small {
+        color: #717377;
+        font-size: 10px;
+    }
+}
+
+::ng-deep svg {
+    .violated-hovered {
+        path.cloned-hovered {
+            stroke-width: 5px !important;
+            stroke: $violate-color-hover !important;
+            stroke-dasharray: 20 65 !important;
+        }
+        circle {
+            stroke-width: 2px;
+            stroke: $violate-color-text-hover !important;
+        }
+    }
+
+    .violated-selected {
+        path.cloned-selected {
+            stroke-width: 5px;
+            &.color-0 {
+                stroke: $violate-color-0 !important;
+                stroke-dasharray: 0 25 20 40 !important;
+            }
+            &.color-1 {
+                stroke: $violate-color-1 !important;
+                stroke-dasharray: 0 50 20 15 !important;
+            }
+        }
+        circle {
+            stroke-width: 2px;
+            stroke: $violate-color-text-hover !important;
+        }
+    }
+    
+    .hovered {
+        path {
+            stroke: $violate-color-hover; /*rgb(5, 48, 97);*/
+            stroke-width: 3px;
+        }
+    }
+    .node, .linknode {
+        &:hover, &.hovered {
+            &>circle {
+                stroke-width: 4px;
+                stroke: $violate-color-hover;
+            }
+        }
+    }
+    
+    .linknode {
+        cursor: pointer;
+        text.node-title {
+            font-size: 32px;
+            font-weight: bold;
+            fill: #343a40;
+        }
+    }
+
+    .node:hover  text.node-title, .node.hovered text.node-title, .violated-selected text.node-title, .violated-hovered text.node-title {
+        font-size: 36px !important;
+        font-weight: bold !important;
+        fill: $violate-color-text-hover !important;
+    }
+
+    .node text.node-title {
+        font-size: 32px;
+        fill: #888;
+    }
+
+    .node > .cost {
+        font-size: 20px;
+    }
+    
+    .arc.filterable {
+        &.filter-in {
+            cursor: zoom-in !important;
+        }
+        &.filter-out {
+            cursor: zoom-out !important;
+        }
+    }
+
+    .arc text {
+        font-size: 12px;
+        text-anchor: middle;
+    }
+    
+    .arc > path.arc-path {
+        display: block;
+    }
+    
+    .link {
+        fill: none;
+        stroke: #bbb;
+    }
+
+    .arc>path.arc-path-hover {
+        display: none;
+    }
+    
+    .node-num-violation {
+        &>g.dummy {
+            display: none;
+        }
+        
+        rect {
+            width: 30px;
+            fill: #fff;
+            stroke-width: 1px;
+            stroke: #8b0000;
+        }
+        text>tspan {
+            fill: #8b0000;
+            font-size: 18px;
+            &.num {
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+        
+        &>.color-hovered {
+            text>tspan { fill: $violate-color-text-hover !important; }
+            rect { stroke: $violate-color-text-hover !important; }
+        }
+        &>.color-0 {
+            text>tspan { fill: $violate-color-0 !important; }
+            rect { stroke: $violate-color-0 !important; }
+        }
+        &>.color-1 {
+            text>tspan { fill: $violate-color-1 !important; }
+            rect { stroke: $violate-color-1 !important; }
+        }
+    }
+}
+
+::ng-deep {
+    .legend {
+        .content-node div, .content-link>div, .content-link.hovered {
+            padding: 4px 8px 4px 8px;
+            &:last-child {
+                padding: 4px 8px 8px 8px;
+            }
+        }
+        .content-link {
+            max-height: 300px;
+            overflow-y: auto;
+            color: #333;
+            font-size: 12px;
+            overflow-y: auto;
+            height: calc(100% - 46px);
+        
+            .constraint {
+                background-color: rgb(246,246,246);
+                margin-bottom: 4px;
+        
+                .title {
+                    font-size: 14px;
+                    font-weight: bold;
+                    small {
+                        color: #8b0000;
+                    }
+                }
+                .asp {
+                    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+                }
+                .description {
+                    padding: 2px 0 4px 0;
+                    background-color: #f6f6f6;
+                    color: #757a80;
+                    font-size: 11px;
+                    line-height: 1.1;
+                }
+                .highlight {
+                    color: $feature-highlight;
+                }
+            }
+        }
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 7px;
+            z-index: 1102;
+            color: #333;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            padding: 2px;
+            &:hover {
+                color: #8b0000 !important;
+                font-size: 14px;
+                right: 6px;
+            }
+        }
+    }
+
+    .legend-transfer {
+        .title {
+            @include title;
+        }
+
+        &>svg {
+            height: 23px;
+        }
+        
+        .legend-transfer-tick {
+            stroke: #717377;
+            fill: #cccccc;
+        }
+    
+        .legend-transfer-label-text {
+            fill: #717377;
+            font-size: 10px;
+        }
+    }
+}
+
+::ng-deep .show, .show {
+    display: block !important;
+}
+
+.legend-controls {
+    position: absolute;
+    bottom: 3px;
+    left: 10px;
+    height: 44px;
+}
+
+::ng-deep .controls {
+    display: inline-block;
+    .title {
+        @include title;
+    }
+
+    mat-icon {
+        height: 20px;
+        width: 20px;
+        color: #97999c;
+        cursor: pointer;
+        &:hover {
+            color: #717377;
+        }
+    }
+}
+
+::ng-deep .legend-controls, ::ng-deep .controls {
+    >div {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    &>div:first-child {
+        margin-left: 0;
+    }
+}

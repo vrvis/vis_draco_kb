@@ -1,0 +1,5 @@
+<div *ngIf="loading"><mat-spinner diameter="60"></mat-spinner></div>
+
+<div [ngStyle]="{'visibility': drawn ? 'visible': 'hidden'}">
+    <svg:svg id="hypergraph" [attr.width]="_width"></svg>
+</div>

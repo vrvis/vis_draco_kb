@@ -1,0 +1,37 @@
+<div class="diagrams-selected">
+    <div>Selected</div>
+    <div #diagramsSelected class="diagrams"></div>
+</div>
+<div #diagrams class="diagrams"></div>
+    
+<div #chartDummy class="chart hidden">
+    <div class="rec">
+        <div class="vega"></div>
+        <div class="cost">Cost <span></span></div>
+        <div class="violations"></div>
+    </div>
+    <div class="title"></div>
+    <div class="overlay multi-selection-number"></div>
+    <!--<div class="overlay multiple-selection"><mat-icon class="lock-open" aria-hidden="false">lock_open</mat-icon><mat-icon class="lock-closed" aria-hidden="false">lock</mat-icon></div>-->
+    <div class="overlay bg"></div>
+    <div class="overlay gradient"></div>
+    <div class="overlay cost">Cost <span></span><span></span></div>
+    <div class="overlay number-violations"></div>
+    <div class="overlay number-multiples"></div>
+</div>
+
+<div #legend class="legend" [ngStyle]="{'visibility': _legendVisible || _legendFadeOut ? 'visible' : 'none','bottom': _legendPos.bottom + 'px', 'left': _legendPos.left + 'px'}"
+    [ngClass]="{'legend-fade-out' : _legendFadeOut}">
+    <div class="title"><h3>{{_legendData.title}} <small>(cost {{_legendData.weight}})</small></h3></div>
+    <div #zommedChart></div>
+    <div class="content" *ngIf="_legendData.hasContent">
+        <div class="json-viewer" style="padding-bottom: 5px;border-bottom: 1px solid #ccc">
+            Specification
+            <ngx-json-viewer [json]="{data: _legendData.spec.data, mark: _legendData.spec.mark, encoding: _legendData.spec.encoding}" [depth]="0"></ngx-json-viewer></div>
+        <div class="json-viewer">
+            Violations
+            <ngx-json-viewer [json]="{violations: _legendData.model.violations}" [depth]="0"></ngx-json-viewer>
+        </div>
+    </div>
+    <div class="close" (click)="closeLegend()">&#10006;</div>
+</div>

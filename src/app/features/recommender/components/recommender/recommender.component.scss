@@ -1,0 +1,196 @@
+@import '~@angular/material/theming';
+@import "src/variables";
+@import "src/breakpoints";
+
+
+.spinner {
+    width: 400px;
+    margin-left: -150px;
+    margin-top: -35px;
+    &>div {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    mat-spinner {
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+    }
+}
+
+.page-header {
+    position: relative;
+    box-sizing: border-box;
+    width:100%;
+    background-color: $header-bg;
+    color: $header-fg;
+    padding: 10px;
+    h1 {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.recommender-layout {
+    height: calc(100% - 0px);
+
+    as-split-area, as-split {
+        box-sizing: border-box;
+    }
+}
+
+app-recommendations, app-radial-hypergraph {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+::ng-deep {
+    .mat-select, .mat-select-value, .mat-select-panel, .mat-select-content, .mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+        background-color: #fff !important;
+        opacity: 1 !important;
+    }
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+
+    
+    .constraint-categories-filter-buttons {
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(240,240,240);
+        color: mat-color($primary);
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &>div {
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 5px 17px;
+            width: 50%;
+            text-align: center;
+            &:hover {
+                background-color: rgb(220,220,220);
+                color: mat-color($primary);
+            }
+        }
+    }
+}
+
+.app-ace-editor {
+    /*border: 2px solid #f8f9fa;*/
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+as-split {
+    &.loading {
+        opacity: 0.5;
+    }
+
+    ::ng-deep .as-split-gutter-icon {
+        filter: invert(100%);
+    }
+
+    as-split-area {
+        display: flex !important;
+    }
+
+    ::ng-deep {
+        .first-gutter-hide>.as-split-gutter:first-child, .middle-gutter-hide>.as-split-gutter:nth-child(2), .last-gutter-hide>.as-split-gutter:last-child {
+            display: none;
+        }
+    }
+
+    .header {
+        display: block;
+        box-sizing: border-box;
+        cursor: pointer;
+        padding: 5px;
+        background-color: $split-pane-bg;
+        color: $split-pane-fg;
+    }
+
+    .title {
+        display: inline-flex;
+        vertical-align: middle;
+        margin: 0;
+        line-height: 1;
+        font-size: 16px;
+
+        mat-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            bottom: 3px;
+        }
+        span {
+            margin-left: 10px;
+            padding-top: 1px;
+            small {
+                color: $split-pane-small-fg;
+                opacity: 0.7;
+            }
+        }
+    }
+
+    as-split-area.horizontal {
+        flex-direction: row;
+        position: relative;
+        overflow-y: hidden;
+        &>.header {
+            transform-origin: 0 0;
+            transform: rotate(90deg);
+            position: absolute;
+            left: 30px;
+            top: 0;
+            height: 30px;
+            width: 100vw;
+            flex: 30px 0 0;
+        }
+        &>.content {
+            overflow: auto;
+            padding: 0;
+            width: 100%;
+            margin-left: 30px;
+            flex: 1;
+            padding: 5px;
+        }
+    }
+    as-split-area.vertical {
+        flex-direction: column;
+        overflow-y: hidden;
+        &>.content {
+            position: sticky;
+            top: 0;
+            background-color: transparent;
+            z-index: 900;
+        }
+    }
+
+    as-split-area.expanded {
+        padding: 0;
+    }
+    
+    as-split-area.collapsed {
+        padding: 0;
+    }
+    
+    .controls {
+        position: absolute;
+        top: 0;
+        background-color: transparent;
+        z-index: 900;
+    }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .recommender-layout {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas: "ace" "meta" "diagrams" "hypergraph";
+    width: 100%;
+  }
+}

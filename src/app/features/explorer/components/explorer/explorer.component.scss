@@ -1,0 +1,10 @@
+::ng-deep .link {
+    fill: none;
+    stroke: #bbb;
+}
+
+::ng-deep .node circle {
+    pointer-events: all;
+    stroke: #000;
+    stroke-width: 1px;
+}

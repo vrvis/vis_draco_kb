@@ -1,0 +1,45 @@
+<div *ngIf="_loading" class="spinner">
+    <mat-spinner diameter="60"></mat-spinner>
+</div>
+
+<div [ngStyle]="{'visibility': _drawn ? 'visible': 'hidden', 'position': 'relative'}" style="width:100%;height:100%;display:flex;flex-direction:column;" #hypergraphContainer>
+    <svg:svg id="hypergraph" style="object-fit:cover;width:100%;height:100%" preserveAspectRatio="none"></svg>
+</div>
+
+<div #legendTooltip class="legend" [ngStyle]="{'display' : _legendData.visible ? 'block' : 'none', 'right': _legendPos.right + 'px', 'bottom': _legendPos.bottom + 'px'}"
+    [ngClass]="{'legend-fade-out' : _legendData.fadeOut}" >
+    <div class="title" [ngStyle]="{'background-color': _legendData.titleColorBackground}"><h3 [ngStyle]="{'color': _legendData.titleColorText}">{{_legendData.title}}</h3></div>
+    <div class="content" (resized)="onContainerResized($event)">
+        <div class="content-node" *ngIf="!_legendData.link && !_legendData.filtered">
+            <div>{{_legendData.asp?.split(":-")[0]}}<br/>{{_legendData.asp?.split(":-")[1]}}</div>
+            <div *ngIf="_legendData.description" class="description">{{_legendData.description}}</div>
+            <div class="weight" *ngIf="(_legendData.weight && _legendData.weight != -1) || (_legendData.weight == 0)">{{_legendData.weight}} <span>of max <b>{{_max}}</b></span></div>
+        </div>
+        <div class="content-link selected" *ngIf="_legendData.link && _legendData.selected && !_legendData.filtered">
+            <div *ngFor="let node of _legendData.nodesHighlight; index as i" class="constraint">
+                <div class="title">{{ node.name }} <small class="cost">(cost {{ node.weight }})</small></div>
+                <div class="description">{{ node.description }}</div>
+                <div class="asp"><span *ngFor="let a of node.asp" [ngClass]="{'highlight': a == _legendData.title}">{{a}}</span></div>
+            </div>
+        </div>
+        <div class="content-link hovered" *ngIf="_legendData.link && !_legendData.selected && !_legendData.filtered">
+            Click to show connected nodes
+        </div>
+        <div class="content-link hovered" *ngIf="_legendData.filtered">
+            Click to filter by corresponding nodes
+        </div>
+    </div>
+    <div class="close" *ngIf="_legendData.selected" [ngStyle]="{'color': _legendData.titleColorText}" (click)="closeLegend()">&#10006;</div>
+</div>
+
+<div class="legend-controls">
+    <div #legendTransfer class="legend-transfer" style="width:300px" [ngStyle]="{'display' : _legendTransferVisible || _loading ? 'inline-block' : 'none'}">
+        <div class="title" *ngIf="!_loading">Costs of rules <small>(Min - Max)</small></div>
+    </div>
+
+    <div class="controls" style="width:100px" *ngIf="!_loading">
+        <div class="title"></div>
+        <div class="control-reset-camera" (click)="resetCamera()"><mat-icon aria-hidden="false" matTooltip="Reset camera to default" matTooltipPosition="above">home</mat-icon></div>
+        <div class="control-reset-filter" (click)="resetFilter()"><mat-icon aria-hidden="false" matTooltip="Reset filter" matTooltipPosition="above">filter_alt</mat-icon></div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
+}
+
+.legend {
+    position: absolute;
+    /*left: 0;
+    top: 0;*/
+    display: none;
+    background-color: #fff;
+    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+    -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+    box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+    font-size: 10px;
+    transform: translate(0);
+    opacity: 1;
+    color: #333;
+    z-index: 1001; /* 1 greater than vega options (1000) */
+    min-width: 200px;
+    max-width: 300px;
+
+    &>.title {
+        padding: 8px;
+        white-space: nowrap;
+    }
+
+    &>.title>h3 {
+        font-size: 12px;
+        margin-bottom: 0 !important;
+        color: #fff;
+        font-weight: bold !important;
+        line-height: 1 !important;
+        width: 100%;
+    }
+
+    .description {
+        background-color: #eee;
+    }
+
+    .weight {
+        margin-top: 10px;
+        font-size: 30px;
+        span {
+            font-size: 12px;
+        }
+    }
+}
+
+.legend.legend-fade-out {
+    opacity: 0;
+    transform: translateY(-10000px);
+    -webkit-animation: fadeOut .44s ease .25;
+    animation: fadeOut .44s ease .25;
+}
+
+@keyframes fadeOut {
+    0%   { opacity: 1; transform: translateY(0px); }
+    95% { opacity: 0; transform: translateY(0px); }
+    100% { opacity: 0; transform: translateY(-10000px); }
+}
+
+/* ------------------------------------------------------------------------------------------------- */
+/* Global angular material overrides */
+.mat-button-base {
+    padding: 2px 15px !important;
+    top: -2px !important;
+}
+
+/* Height and length of material nput fields */
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 4px 0 12px 0 !important;
+}
+.mat-form-field {
+    width: 149px !important;
+}
+.mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix > span.mat-form-field-label-wrapper { top: -1.3em !important; }
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75) !important;
+}
+input.mat-input-element {
+    margin-top: -0.125em !important;
+    height: 18px !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: .55em !important;
+}
+
+/* Drpdown select reset */
+.mat-select-panel {
+    max-height: 300px !important;
+    overflow-y: auto;
+}
