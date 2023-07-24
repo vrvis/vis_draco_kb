@@ -12,7 +12,7 @@ We extend the existing data extraction strategy of Draco with a data processing 
 ## Demo
 
 You can view an online demo here:
-https://vrvis.github.io/projects/sel_angular_brushing
+https://vrvis.github.io/projects/vis_draco_kb/
 
 
 ## Reference
