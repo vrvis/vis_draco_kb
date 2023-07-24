@@ -12,7 +12,7 @@ We extend the existing data extraction strategy of Draco with a data processing 
 ## Demo
 
 You can view an online demo here:
-https://vrvis.github.io/projects/vis_draco_kb/
+<http://vizrec.bernhardpointner.com/>
 
 
 ## Reference
@@ -24,8 +24,6 @@ Please cite the following paper when using the code:
 > Johanna Schmidt, Bernhard Pointner, and Silvia Miksch (2023).
 > *Visual Analytics for Understanding Draco’s Knowledge Base*.
 > In Proceedings of VIS 2023. To appear in IEEE Transactions on Visualization and Computer Graphics.
-
-https://diglib.eg.org/bitstream/handle/10.2312/evs20211064/109-113.pdf
 
 
 ## Installation
