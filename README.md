@@ -2,17 +2,17 @@
 
 This project presents a web-based Visual Analytics approach which helps to better understand the **Draco** (<https://uwdata.github.io/draco/>) visualization recommender systems' knowledge base.
 
-Draco has been developed as an automated visualization recommendation system formalizing design knowledge as logical constraints in ASP (Answer-Set Programming). With an increasing set of constraints and incorporated design knowledge, even visualization experts lose overview in Draco and struggle to retrace the automated recommendation decisions made by the system. We propose a Visual Analytics (VA) approach to visualize and analyze Draco’s constraints. Our VA approach is supposed to enable visualization experts to accomplish identified tasks regarding the knowledge base and support them in better understanding Draco:
+Draco has been developed as an automated visualization recommendation system formalizing design knowledge as logical constraints in ASP (Answer-Set Programming). With an increasing set of constraints and incorporated design knowledge, even visualization experts lose overview in Draco and struggle to retrace the automated recommendation decisions made by the system. We propose a **Visual Analytics (VA) approach** to visualize and analyze Draco’s constraints. Our VA approach is supposed to enable visualization experts to accomplish identified tasks regarding the knowledge base and support them in **better understanding Draco's internal rules**:
 
 ![Teaser](https://github.com/vrvis/vis_draco_kb/raw/main/teaser.png?raw=true)
 
-We extend the existing data extraction strategy of Draco with a data processing architecture capable of extracting features of interest from the knowledge base. A revised version of the ASP grammar provides the basis for this data processing strategy. The resulting incorporated and shared features of the constraints are then visualized using a hypergraph structure inside the radial-arranged constraints of the elaborated visualization. The hierarchical categories of the constraints are indicated by arcs surrounding the constraints. Our approach is supposed to enable visualization experts to interactively explore the design rules’ violations based on highlighting respective constraints or recommendations. A qualitative and quantitative evaluation of the prototype confirms the prototype’s effectiveness and value in acquiring insights into Draco’s recommendation process and design constraints.
+We extend the existing data extraction strategy of Draco with a data processing architecture capable of extracting features of interest from the knowledge base. A revised version of the ASP grammar provides the basis for this data processing strategy. The resulting incorporated and shared features of the constraints are then visualized using a hypergraph structure inside the radial-arranged constraints of the elaborated visualization. The hierarchical categories of the constraints are indicated by arcs surrounding the constraints. Our approach is supposed to enable visualization experts to **interactively explore the design rules' violations** based on highlighting respective constraints or recommendations.
 
 
 ## Demo
 
 You can view an online demo here:
-<http://vizrec.bernhardpointner.com/>
+<https://vrvis.github.io/projects/vis_draco_kb/>
 
 
 ## Reference
@@ -28,18 +28,24 @@ Please cite the following paper when using the code:
 
 ## Installation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.12. Run `npm install` for installing all required modules.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.12.
 
 **Please note**:
 * Newer Angular versions are not supported unless `angular-resize-event` supports it.
-* Add `"allowSyntheticDefaultImports": true` to tsconfig.ts (https://github.com/vega/vega-lite/issues/4461, https://github.com/vega/vega-embed/issues/151).
-* Delete all vega dependencies in `./node_modules/draco-core/node_modules/`. Unfortunately, Draco has not been updated yet to support the newest version of Vega.
+* The parameter `"allowSyntheticDefaultImports": true` needed to be added to tsconfig.ts (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
+
+**Necessary steps for local installation:**
+* NodeJS needs to be installed.
+* Run `npm install` for installing all required modules.
+* Manually delete all vega dependencies in `./node_modules/draco-core/node_modules/` (detele all folders with vega-*). Unfortunately, Draco has not been updated yet to support the newest version of Vega.
+
 
 ### Local development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+* Run `ng serve` for starting a development server.
+* Navigate your browser to `http://localhost:4200/`.
 
-### Build
+### Production Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `./dist` directory.
 
