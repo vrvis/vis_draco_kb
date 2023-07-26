@@ -5,12 +5,9 @@ import { RecommenderComponent } from './features/recommender/components';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'recommender', pathMatch: 'full' },
-  { path: 'explorer', component: ExplorerComponent },
-  {
-    path: 'recommender',
-    component: RecommenderComponent
-  },
-  { path: '**', redirectTo: 'recommender', pathMatch: 'full' }
+  { path: '**', redirectTo: 'recommender', pathMatch: 'full' },
+  { path: 'recommender', component: RecommenderComponent },
+  { path: 'explorer', component: ExplorerComponent }
 ];
 
 @NgModule({
