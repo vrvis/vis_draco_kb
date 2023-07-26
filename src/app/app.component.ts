@@ -7,7 +7,7 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'vizrec';
+  title = 'vis-for-draco-kb';
 
   constructor(private db : NgxIndexedDBService) {
   }
