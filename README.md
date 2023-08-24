@@ -32,7 +32,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 **Please note**:
 * Newer Angular versions are not supported unless `angular-resize-event` supports it.
-* The parameter `"allowSyntheticDefaultImports": true` needed to be added to tsconfig.ts (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
+* The parameter `"allowSyntheticDefaultImports": true` needed to be added to tsconfig.json (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
 
 **Necessary steps for local installation:**
 * NodeJS needs to be installed.
