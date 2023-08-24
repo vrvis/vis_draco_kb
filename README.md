@@ -17,7 +17,7 @@ You can view an online demo here:
 
 ## Reference
 
-This work will be presented at this' years VIS conference.
+This work will be presented at VIS 2023 conference.
 
 Please cite the following paper when using the code:
 
@@ -28,17 +28,44 @@ Please cite the following paper when using the code:
 
 ## Installation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.12.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.3.0.
 
 **Please note**:
 * Newer Angular versions are not supported unless `angular-resize-event` supports it.
 * The parameter `"allowSyntheticDefaultImports": true` needed to be added to tsconfig.json (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
 
-**Necessary steps for local installation:**
-* NodeJS needs to be installed.
-* Run `npm install` for installing all required modules.
-* Manually delete all vega dependencies in `./node_modules/draco-core/node_modules/` (detele all folders with vega-*). Unfortunately, Draco has not been updated yet to support the newest version of Vega.
+### 1. NodeJS / Angular
 
+NodeJS and Angular need to be installed.
+
+#### Windows
+
+* Install **NodeJS** (https://nodejs.org/en). We used version 18.17.0.
+
+#### Linux
+
+* Install **npm** using your package manager (e.g., apt). npm needs to be version 9 (we used 9.6.3).
+* Install **angular/cli** using the newly installed npm: `npm install -g @angular/cli@14.3.0`. @angular/cli needs to be version 14.3 (we used 14.3.0).
+
+#### MacOS
+
+* Install **npm** using the package manager (`sudo port install npm9`). npm needs to be version 9 (we used 9.6.3).
+* Install **angular/cli** using the newly installed npm: `sudo npm install -g @angular/cli@14.3.0`. @angular/cli needs to be version 14.3 (we used 14.3.0).
+
+
+### 2. Package installation
+
+In the folder of the project, run `npm install` for installing all required modules.
+
+
+### 3. Additional requirements
+
+It is necessary to manually delete all vega dependencies in `./node_modules/draco-core/node_modules/` (detele all folders with vega-*). Unfortunately, Draco has not been updated yet to support the newest version of Vega.
+
+
+## Running the application
+
+The application can be run as a local development server. This is suggested to local development purposes, but not for production purposes.
 
 ### Local development server
 
