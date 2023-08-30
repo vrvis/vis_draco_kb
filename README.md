@@ -26,13 +26,19 @@ Please cite the following paper when using the code:
 > In Proceedings of VIS 2023. To appear in IEEE Transactions on Visualization and Computer Graphics.
 
 
+## Vision
+Automated visualization recommendation systems should be capable of creating charts of extensible specifications. ML based approaches are therefore, limited to a small predefined number of possible specifications and chart types. Vega-Lite is such an declarative specification language for creating various types of visualizations and specification, even with basic interaction possibilites. So, the vision is to extend the formal model of Draco to cover all possible visualizations of vega-lite and rank them by criteria of expressivness and effectiveness.
+
+Because Draco's knowledge base is based on an incomplete set of rules, design experts and researchers have to extend this model to enhance Draco's recommendation capabilities. Extending this model requires the understanding of the syntax of these constraints and the structure and content of the current implemented knowledge base. As the the learning curve for this task is quite high, there is a need of an interactive system to search in this knowledge base, filter it, interact with it and showing coherences and dependencies.
+
+
 ## Installation
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.3.0.
 
 **Please note**:
 * Newer Angular versions are not supported unless `angular-resize-event` supports it.
-* The parameter `"allowSyntheticDefaultImports": true` needed to be added to tsconfig.json (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
+* The parameter `"allowSyntheticDefaultImports": true` had to be added to `tsconfig.json` (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
 
 ### 1. NodeJS / Angular
 
@@ -55,29 +61,23 @@ NodeJS and Angular need to be installed.
 
 ### 2. Package installation
 
-In the folder of the project, run `npm install` for installing all required modules.
+In the folder of the project, run `npm install` for installing all required modules. This will create a folder `node_modules` with all libraries in there and a file `package-lock.json`.
 
 
 ### 3. Additional requirements
 
-It is necessary to manually delete all vega dependencies in `./node_modules/draco-core/node_modules/` (detele all folders with vega-*). Unfortunately, Draco has not been updated yet to support the newest version of Vega.
+It is necessary to manually delete all vega dependencies in `./node_modules/draco-core/node_modules` by deleting all folders that start with `vega-*`. Unfortunately, Draco has not been updated yet to support the newest version of Vega.
 
 
 ## Running the application
 
-The application can be run as a local development server. This is suggested to local development purposes, but not for production purposes.
+The application can be run as a local development server. This is suggested for local development purposes, but not for production purposes.
 
 ### Local development server
 
 * Run `ng serve` for starting a development server.
-* Navigate your browser to `http://localhost:4200/`.
+* Navigate your browser to http://localhost:4200/.
 
 ### Production Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `./dist` directory.
-
-
-## Vision
-Automated visualization recommendation systems should be capable of creating charts of extensible specifications. ML based approaches are therefore, limited to a small predefined number of possible specifications and chart types. Vega-Lite is such an declarative specification language for creating various types of visualizations and specification, even with basic interaction possibilites. So, the vision is to extend the formal model of Draco to cover all possible visualizations of vega-lite and rank them by criteria of expressivness and effectiveness.
-
-Because Draco's knowledge base is based on an incomplete set of rules, design experts and researchers have to extend this model to enhance Draco's recommendation capabilities. Extending this model requires the understanding of the syntax of these constraints and the structure and content of the current implemented knowledge base. As the the learning curve for this task is quite high, there is a need of an interactive system to search in this knowledge base, filter it, interact with it and showing coherences and dependencies.
+Run `ng build` to build the project. If you plan to host the website under a specific domain, you will probably have to add `base-href` to the command (in our case, we used `ng build --base-href='https://vrvis.github.io/projects/vis_draco_kb/'`). The build artifacts will be stored in the `./dist` directory.
