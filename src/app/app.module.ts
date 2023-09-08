@@ -17,9 +17,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     BrowserAnimationsModule
   ],
-  providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy}
-  ],
+  providers: [],
   bootstrap: [
     AppComponent
   ]
