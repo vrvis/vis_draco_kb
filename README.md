@@ -117,7 +117,7 @@ Clone the repository:
 
 #### Via direct download
 
-If Git is not installed or should not be used, tt is also possible to download the source code as a **ZIP file** from Github and store it in a local folder.
+If Git is not installed or should not be used, it is possible to download the source code as a **ZIP file** from Github and store it in a local folder.
 
 ### 3. Package installation
 
@@ -125,7 +125,7 @@ In the folder of the project (where the `package.json` file is located), run `np
 ```
 npm install
 ```
-This will create a folder `node_modules` with all libraries in there and a file `package-lock.json`.
+This will create a folder `node_modules` with all libraries files and a file `package-lock.json`.
 
 ### 4. Additional requirements
 
