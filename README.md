@@ -82,7 +82,7 @@ This installation was tested on Ubuntu 22.04. The installation of NodeJS version
 * Install **NodeJS v18** from the [NodeJS website](https://nodejs.org/) (use [node-v18.17.1.pkg](https://nodejs.org/dist/v18.17.1/node-v18.17.1.pkg)).
 * Install **Angular/Cli v15.2.9**:
   ```
-  npm install -g @angular/cli@15.2.9
+  sudo npm install -g @angular/cli@15.2.9
   ```
 
 ### 2. Source Code
@@ -104,9 +104,11 @@ Download [Git for Windows](https://git-scm.com/download/win) and install it. A g
     sudo apt-get install git
 
 ###### MacOS
-
+* Install [MacPorts](https://www.macports.org/install.php) if not available.
+* Install Git using MacPorts:
+  ```
     sudo port install git
-
+  ```
 ##### Git Clone
 Clone the repository:
   ```
