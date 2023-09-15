@@ -79,13 +79,16 @@ This installation was tested on Ubuntu 22.04. The installation of NodeJS version
 
 #### MacOS
 
-* Install **npm** using the package manager (`sudo port install npm`)
-* Install **angular/cli** (version 15.2.9) using the newly installed npm: `npm install -g @angular/cli@15.2.9`.
+* Install **NodeJS v18** from the [NodeJS website](https://nodejs.org/) (use [node-v18.17.1.pkg](https://nodejs.org/dist/v18.17.1/node-v18.17.1.pkg)).
+* Install **Angular/Cli v15.2.9**:
+  ```
+  npm install -g @angular/cli@15.2.9
+  ```
 
 ### 2. Source Code
 
 It is possible to clone the **Git** repository:
-* Install Git, if not available:
+* Install Git, if not available (example here for Linux):
   ```
   sudo apt-get install git
   ```
@@ -115,11 +118,11 @@ The application can be run as a local development server. This is suggested for 
 
 ### Local development server
 
-* Run `ng serve` for starting a development server:
+* Use Angular to start a local development server:
   ```
   ng serve
   ```
-*Autocompletion* and *sharing usage data* do not have to be enabled, when asked.
+  *Autocompletion* and *sharing usage data* do not have to be enabled, when asked.
 * Navigate your browser to http://localhost:4200/
 
 ### Production Build
