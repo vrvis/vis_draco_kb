@@ -54,11 +54,11 @@ NodeJS version 18 and Angular/Cli version 15.2.9 need to be installed.
 
 This installation was tested on Ubuntu 22.04. The installation of NodeJS version 18 was done according to the [NodeJS manual](https://github.com/nodesource/distributions).
 
-* Install **curl**, if not available:
+* Install **curl**, if not available
   ```
   sudo apt-get install curl
   ```
-* Prepare **apt-get** sources:
+* Prepare **apt-get** sources
   ```
   sudo apt-get update
   sudo apt-get install -y ca-certificates curl gnupg
@@ -68,19 +68,19 @@ This installation was tested on Ubuntu 22.04. The installation of NodeJS version
   echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
   sudo apt-get update
   ```
-* Install **NodeJS v18**:
+* Install **NodeJS v18**
   ```
   sudo apt-get install nodejs -y
   ```
-* Install **Angular/Cli v15.2.9**:
+* Install **Angular/Cli v15.2.9**
   ```
   sudo npm install -g @angular/cli@15.2.9
   ```
 
 #### MacOS
 
-* Install **NodeJS v18** from the [NodeJS website](https://nodejs.org/) (use [node-v18.17.1.pkg](https://nodejs.org/dist/v18.17.1/node-v18.17.1.pkg)).
-* Install **Angular/Cli v15.2.9**:
+* Install **NodeJS v18** from the [NodeJS website](https://nodejs.org/) (use [node-v18.17.1.pkg](https://nodejs.org/dist/v18.17.1/node-v18.17.1.pkg))
+* Install **Angular/Cli v15.2.9**
   ```
   sudo npm install -g @angular/cli@15.2.9
   ```
@@ -104,13 +104,13 @@ Download [Git for Windows](https://git-scm.com/download/win) and install it. A g
     sudo apt-get install git
 
 ###### MacOS
-* Install [MacPorts](https://www.macports.org/install.php) if not available.
-* Install Git using MacPorts:
+* Install [MacPorts](https://www.macports.org/install.php) if not available
+* Install Git using MacPorts
   ```
     sudo port install git
   ```
 ##### Git Clone
-Clone the repository:
+Clone the repository
   ```
   git clone https://github.com/vrvis/vis_draco_kb
   ```
@@ -121,7 +121,7 @@ If Git is not installed or should not be used, it is possible to download the so
 
 ### 3. Package installation
 
-In the folder of the project (where the `package.json` file is located), run `npm install` for installing all required modules:
+In the folder of the project (where the `package.json` file is located), run `npm install` for installing all required modules
 ```
 npm install
 ```
@@ -138,26 +138,26 @@ The application can be run as a local development server. This is suggested for 
 
 ### Local development server
 
-* Use Angular to start a local development server:
+* Use Angular to start a local development server
   ```
   ng serve
   ```
-  *Autocompletion* and *sharing usage data* do not have to be enabled, when asked.
+  *Autocompletion* can be, but *sharing usage data* does not have to be enabled, when asked.
 * Navigate your browser to http://localhost:4200/
 
 ### Production Build
 
-Run Angular build:
+Run Angular build
   ```
   ng build
   ```
-or:
+or use npm
   ```
   npm run build
   ```
 The build artifacts will be stored in the `./dist` directory.
 
-If you plan to host the website under a specific domain, you will probably have to add `base-href` to the command. For example, in our case, we used:
+If you plan to host the website under a specific domain, you will probably have to add `base-href` to the command. For example, in our case, we used
   ```
   ng build --base-href='https://vrvis.github.io/projects/vis_draco_kb/'
   ```
