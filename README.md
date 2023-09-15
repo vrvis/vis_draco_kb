@@ -87,15 +87,33 @@ This installation was tested on Ubuntu 22.04. The installation of NodeJS version
 
 ### 2. Source Code
 
-It is possible to clone the **Git** repository:
-* Install Git, if not available (example here for Linux):
-  ```
-  sudo apt-get install git
-  ```
-* Clone the repository
+The source code is available here on Github.
+
+#### Via Git cloning
+
+##### Install Git
+
+Install Git, if not available.
+
+###### Windows
+
+Download [Git for Windows](https://git-scm.com/download/win) and install it. A graphical user interface like [TortoiseGit](https://tortoisegit.org/) is recommended.
+
+###### Linux
+    
+    sudo apt-get install git
+
+###### MacOS
+
+    sudo port install git
+
+##### Git Clone
+Clone the repository:
   ```
   git clone https://github.com/vrvis/vis_draco_kb
   ```
+
+#### Via direct download
 
 If Git is not installed or should not be used, tt is also possible to download the source code as a **ZIP file** from Github and store it in a local folder.
 
