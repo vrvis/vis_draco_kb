@@ -27,6 +27,7 @@ Please cite the following paper when using the code:
 
 
 ## Vision
+
 Automated visualization recommendation systems should be capable of creating charts of extensible specifications. ML based approaches are therefore, limited to a small predefined number of possible specifications and chart types. Vega-Lite is such an declarative specification language for creating various types of visualizations and specification, even with basic interaction possibilites. So, the vision is to extend the formal model of Draco to cover all possible visualizations of vega-lite and rank them by criteria of expressivness and effectiveness.
 
 Because Draco's knowledge base is based on an incomplete set of rules, design experts and researchers have to extend this model to enhance Draco's recommendation capabilities. Extending this model requires the understanding of the syntax of these constraints and the structure and content of the current implemented knowledge base. As the the learning curve for this task is quite high, there is a need of an interactive system to search in this knowledge base, filter it, interact with it and showing coherences and dependencies.
@@ -34,37 +35,76 @@ Because Draco's knowledge base is based on an incomplete set of rules, design ex
 
 ## Installation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.3.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 **Please note**:
-* Newer Angular versions are not supported unless `angular-resize-event` supports it.
+* Newer Angular/Cli versions newer than 14.3.0 (as defined in the `package.json` file) are not supported unless `angular-resize-event` supports it.
 * The parameter `"allowSyntheticDefaultImports": true` had to be added to `tsconfig.json` (<https://github.com/vega/vega-lite/issues/4461>, <https://github.com/vega/vega-embed/issues/151>).
+* We deliver Draco as a pre-build library (`./lib/draco-core-0.0.6-prebuild.tgz`) due to conflicts with newer versions of Vega-Lite. We will go back to using the npm version once the references have been updated.
 
 ### 1. NodeJS / Angular
 
-NodeJS and Angular need to be installed.
+NodeJS version 18 and Angular/Cli version 15.2.9 need to be installed.
 
 #### Windows
 
-* Install **NodeJS** (https://nodejs.org/en). We used version 18.17.0.
+* Install **NodeJS v18** (https://nodejs.org/en) - we used version [18.17.1 | 64bit](https://nodejs.org/download/release/v18.17.1/node-v18.17.1-x64.msi).
 
 #### Linux
 
-* Install **npm** using your package manager (e.g., apt). npm needs to be version 9 (we used 9.6.3).
-* Install **angular/cli** using the newly installed npm: `npm install -g @angular/cli@14.3.0`. @angular/cli needs to be version 14.3 (we used 14.3.0).
+This installation was tested on Ubuntu 22.04. The installation of NodeJS version 18 was done according to the [NodeJS manual](https://github.com/nodesource/distributions).
+
+* Install **curl**, if not available:
+  ```
+  sudo apt-get install curl
+  ```
+* Prepare **apt-get** sources:
+  ```
+  sudo apt-get update
+  sudo apt-get install -y ca-certificates curl gnupg
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  NODE_MAJOR=18
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+  sudo apt-get update
+  ```
+* Install **NodeJS v18**:
+  ```
+  sudo apt-get install nodejs -y
+  ```
+* Install **Angular/Cli v15.2.9**:
+  ```
+  sudo npm install -g @angular/cli@15.2.9
+  ```
 
 #### MacOS
 
-* Install **npm** using the package manager (`sudo port install npm9`). npm needs to be version 9 (we used 9.6.3).
-* Install **angular/cli** using the newly installed npm: `sudo npm install -g @angular/cli@14.3.0`. @angular/cli needs to be version 14.3 (we used 14.3.0).
+* Install **npm** using the package manager (`sudo port install npm`)
+* Install **angular/cli** (version 15.2.9) using the newly installed npm: `npm install -g @angular/cli@15.2.9`.
 
+### 2. Source Code
 
-### 2. Package installation
+It is possible to clone the **Git** repository:
+* Install Git, if not available:
+  ```
+  sudo apt-get install git
+  ```
+* Clone the repository
+  ```
+  git clone https://github.com/vrvis/vis_draco_kb
+  ```
 
-In the folder of the project, run `npm install` for installing all required modules. This will create a folder `node_modules` with all libraries in there and a file `package-lock.json`.
+If Git is not installed or should not be used, tt is also possible to download the source code as a **ZIP file** from Github and store it in a local folder.
 
+### 3. Package installation
 
-### 3. Additional requirements
+In the folder of the project (where the `package.json` file is located), run `npm install` for installing all required modules:
+```
+npm install
+```
+This will create a folder `node_modules` with all libraries in there and a file `package-lock.json`.
+
+### 4. Additional requirements
 
 It is necessary to manually delete all vega dependencies in `./node_modules/draco-core/node_modules` by deleting all folders that start with `vega-*`. Unfortunately, Draco has not been updated yet to support the newest version of Vega.
 
@@ -75,9 +115,26 @@ The application can be run as a local development server. This is suggested for 
 
 ### Local development server
 
-* Run `ng serve` for starting a development server.
-* Navigate your browser to http://localhost:4200/.
+* Run `ng serve` for starting a development server:
+  ```
+  ng serve
+  ```
+*Autocompletion* and *sharing usage data* do not have to be enabled, when asked.
+* Navigate your browser to http://localhost:4200/
 
 ### Production Build
 
-Run `ng build` to build the project. If you plan to host the website under a specific domain, you will probably have to add `base-href` to the command (in our case, we used `ng build --base-href='https://vrvis.github.io/projects/vis_draco_kb/'`). The build artifacts will be stored in the `./dist` directory.
+Run Angular build:
+  ```
+  ng build
+  ```
+or:
+  ```
+  npm run build
+  ```
+The build artifacts will be stored in the `./dist` directory.
+
+If you plan to host the website under a specific domain, you will probably have to add `base-href` to the command. For example, in our case, we used:
+  ```
+  ng build --base-href='https://vrvis.github.io/projects/vis_draco_kb/'
+  ```

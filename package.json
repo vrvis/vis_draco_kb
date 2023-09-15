@@ -33,7 +33,7 @@
     "d3-hypergraph": "^1.0.0",
     "d3-scale-chromatic": "^3.0.0",
     "d3-selection-multi": "^1.0.1",
-    "draco-core": "^0.0.6",
+    "draco-core": "file:/./lib/draco-core-0.0.6-prebuild.tgz",
     "ebnf": "^1.9.1",
     "ebnf-parser": "^0.1.10",
     "monaco-editor": "^0.40.0",
